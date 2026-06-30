@@ -118,13 +118,11 @@ export default function Hero() {
             </button>
           </Magnetic>
 
-          {/* Download CV/Resume CTA */}
           <Magnetic range={30}>
             <a
-              href="https://resume-maker-online.netlify.app/" // Using Pradeep's resume generator as placeholder or dynamic link
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-4 bg-white/[0.01] hover:bg-white/[0.04] text-slate-300 hover:text-white text-sm font-medium transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+              href="/Pradeep_Koirala_Resume_Updated2026.pdf"
+              download="Pradeep_Koirala_Resume.pdf"
+              className="px-6 py-4 bg-card-bg border border-card-border hover:bg-card-bg/80 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-sm font-medium transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer rounded-xl"
             >
               <FileText className="w-4 h-4 text-cyan-400" />
               Download CV
