@@ -62,20 +62,20 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Pradeep Koirala",
-    title: "Full-Stack Developer",
+    title: "Full Stack Developer",
     subTitle: "Crafting scalable backend architectures and refined, responsive user experiences.",
     email: "pradeepkoirala07@gmail.com",
     github: "https://github.com/Koiralapradeep",
     linkedin: "https://www.linkedin.com/in/pradeep-koirala-b22636202/",
-    bioBrief: "Computer Science graduate specializing in comprehensive full-stack engineering, ML pipelines, and custom enterprise automation.",
+    bioBrief: "Computer Science graduate and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, debugging, testing, and project documentation.",
     bioLong: [
-      "I am a Computer Science graduate from Herald College Kathmandu (BSc Hons Computer Science, accredited by the University of Wolverhampton). My primary expertise spans modern backend architectures, full-stack frameworks (MERN, Django), and machine learning pipelines.",
-      "My passion is engineering scalable, responsive software that solves complex real-world requirements. From design details to deployment pipelines, I prioritize clean implementation, intuitive UX, and modular code structures.",
-      "Whether developing tailored management dashboards, high-performance web applications, or data analysis models, I aim for production-ready excellence. Let's build something outstanding together."
+      "I am a Computer Science graduate and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, debugging, testing, and project documentation.",
+      "My practical background includes building client-facing web applications, dashboard systems, and custom automation, combined with professional experience teaching Computer Science at the secondary and college level.",
+      "With a strong foundation in communication, coordination, and problem-solving, I focus on engineering clean, scalable code structures, responsive UI design, and production-ready deployments."
     ],
     stats: [
-      { value: "5+", label: "Featured Projects" },
-      { value: "3+", label: "Years Programming" },
+      { value: "6+", label: "Completed Projects" },
+      { value: "2+", label: "Years Programming" },
       { value: "15+", label: "Technologies Used" },
       { value: "∞", label: "Learning Mindset" }
     ]
@@ -102,6 +102,29 @@ export const portfolioData: PortfolioData = {
         stack: ["Node.js", "Express", "PostgreSQL", "JavaScript", "HTML5", "CSS3", "SQL"],
         live: "#",
         code: "https://github.com/Koiralapradeep/Troyer-Nepal"
+      }
+    },
+    {
+      id: "jurist",
+      title: "Jurist Council Website",
+      description: "Developed a professional law firm website presenting legal services, lawyer profiles, and consultation booking functionality.",
+      icon: "Scale",
+      tech: ["HTML", "CSS", "JavaScript", "Responsive UI"],
+      live: "https://www.juristcouncil.com.np/",
+      code: "https://www.juristcouncil.com.np/",
+      caseStudy: {
+        kicker: "Case Study • Client Branding",
+        title: "Jurist Council Website",
+        desc: "Developed a professional law firm website presenting legal services, lawyer profiles, and consultation booking functionality.",
+        highlights: [
+          "Designed a refined interface focusing on trust, authority, and accessible content.",
+          "Structured SEO-friendly page paths mapping the firm's core legal specialties.",
+          "Integrated booking and contact workflows to capture incoming consultation requests.",
+          "Optimized assets and page speed for mobile networks."
+        ],
+        stack: ["HTML", "CSS", "JavaScript", "Responsive Design", "SEO Integration"],
+        live: "https://www.juristcouncil.com.np/",
+        code: "https://www.juristcouncil.com.np/"
       }
     },
     {
@@ -195,111 +218,126 @@ export const portfolioData: PortfolioData = {
         live: "https://github.com/Koiralapradeep/AI-ML-Project",
         code: "https://github.com/Koiralapradeep/AI-ML-Project"
       }
-    },
-    {
-      id: "jurist",
-      title: "Jurist Council Website",
-      description: "Modern professional branding page for a Nepal-based legal firm with service paths and bookings.",
-      icon: "Scale",
-      tech: ["HTML", "CSS", "JavaScript", "Responsive UI"],
-      live: "https://www.juristcouncil.com.np/",
-      code: "https://www.juristcouncil.com.np/",
-      caseStudy: {
-        kicker: "Case Study • Client Branding",
-        title: "Jurist Council Website",
-        desc: "A clean legal portal serving Civil, Criminal, and Business law descriptions with consultation integrations.",
-        highlights: [
-          "Designed a refined interface focusing on trust, authority, and accessible content.",
-          "Structured SEO-friendly page paths mapping the firm's core legal specialties.",
-          "Integrated booking and contact workflows to capture incoming consultation requests.",
-          "Optimized assets and page speed for mobile networks."
-        ],
-        stack: ["HTML", "CSS", "JavaScript", "Responsive Design", "SEO Integration"],
-        live: "https://www.juristcouncil.com.np/",
-        code: "https://www.juristcouncil.com.np/"
-      }
     }
   ],
   skills: [
     {
-      title: "Programming",
-      description: "Core algorithms and scripting languages.",
-      icon: "Code",
-      skills: [
-        { name: "Python", level: 90 },
-        { name: "JavaScript / ES6", level: 92 },
-        { name: "TypeScript", level: 85 },
-        { name: "SQL", level: 82 }
-      ]
-    },
-    {
-      title: "Web Development",
-      description: "Frontend responsive UI and modular backend APIs.",
+      title: "Full-Stack Development",
+      description: "Building end-to-end web applications and UI components.",
       icon: "Layers",
       skills: [
-        { name: "React / Next.js", level: 88 },
-        { name: "Node.js / Express", level: 90 },
-        { name: "MongoDB", level: 85 },
-        { name: "Django", level: 78 },
-        { name: "RESTful APIs", level: 92 },
-        { name: "Tailwind CSS", level: 95 }
+        { name: "JavaScript / ES6", level: 92 },
+        { name: "Full-Stack Development", level: 90 },
+        { name: "Front-End & Back-End", level: 90 },
+        { name: "UI Component Implementation", level: 92 },
+        { name: "Web Application Maintenance", level: 88 }
       ]
     },
     {
-      title: "Data Science & AI",
-      description: "Machine learning workflows and natural language models.",
+      title: "Design & Analysis",
+      description: "Creating user experiences and analyzing system data.",
       icon: "Cpu",
       skills: [
-        { name: "TensorFlow / Keras", level: 75 },
-        { name: "NLTK (NLP)", level: 80 },
-        { name: "Pandas / NumPy", level: 82 },
-        { name: "Scikit-Learn", level: 78 }
+        { name: "UI/UX Design", level: 85 },
+        { name: "Figma", level: 80 },
+        { name: "Data Analysis", level: 82 },
+        { name: "Project Documentation", level: 90 },
+        { name: "Brand Development", level: 75 }
       ]
     },
     {
-      title: "Tools & DevOps",
-      description: "Version control, containers, and web deployment.",
+      title: "Tools & Testing",
+      description: "Software testing, coordination, and developer platforms.",
       icon: "Wrench",
       skills: [
-        { name: "Git / GitHub", level: 90 },
-        { name: "Docker", level: 75 },
-        { name: "AWS (S3/EC2)", level: 72 },
-        { name: "PostgreSQL", level: 80 }
+        { name: "Debugging & Testing", level: 88 },
+        { name: "GitHub / Version Control", level: 90 },
+        { name: "Postman / VS Code", level: 92 },
+        { name: "Jira / Project Tracking", level: 85 },
+        { name: "Unity Engine", level: 70 }
+      ]
+    },
+    {
+      title: "Professional Qualities",
+      description: "Soft skills for communication and crisis management.",
+      icon: "Code",
+      skills: [
+        { name: "Creative Thinking", level: 90 },
+        { name: "Crisis Management", level: 85 },
+        { name: "Customer Orientation", level: 88 },
+        { name: "Adaptability", level: 92 }
       ]
     }
   ],
   experience: [
     {
-      title: "Full-Stack Developer",
-      subtitle: "Freelance & Projects",
-      date: "2024 — Present",
+      title: "Computer Science Teacher (Grade 11–12)",
+      subtitle: "Ekata James English Academy, Kathmandu, Nepal",
+      date: "February 2026 — Present",
       points: [
-        "Architected scalable backend APIs and client portals using Next.js, Express, and Django.",
-        "Engineered automated internal software (like Troyer Nepal) utilizing spreadsheet parsers and dynamic charting.",
-        "Constructed protected layouts with robust authorization routing and session management.",
-        "Emphasized clean coding standards, responsive design grids, and deployment reliability."
+        "Teach Computer Science to Class XI and XII students, delivering two periods per day.",
+        "Maintain professional classroom conduct, support student learning, and coordinate positively with staff and college administration."
       ],
       type: "work"
     },
     {
-      title: "ML & NLP Project Lead",
-      subtitle: "Academic & Personal Projects",
-      date: "2023 — 2024",
+      title: "Full Stack Developer",
+      subtitle: "Brainztechs IT Solutions, Kathmandu, Nepal",
+      date: "December 2025 — Present",
       points: [
-        "Constructed Convolutional Neural Networks (CNNs) for image classification (Skin Cancer detection AI).",
-        "Developed custom cleaning pipelines for NLP tokenization, stopwords, and TF-IDF classifiers.",
-        "Trained models using TensorFlow, Keras, and Scikit-Learn to refine classification outputs.",
-        "Assembled metric performance reports demonstrating model progress."
+        "Develop and maintain web application features across client-side and server-side components.",
+        "Implement user interface components, support backend functionality, resolve technical issues, and contribute to smooth project execution.",
+        "Collaborate with team members and stakeholders, applying clear communication, technical dedication, and proactive problem-solving."
+      ],
+      type: "work"
+    },
+    {
+      title: "Developer Intern",
+      subtitle: "Brainztechs IT Solutions, Kathmandu, Nepal",
+      date: "September 2025 — December 2025",
+      points: [
+        "Supported software development lifecycle activities, including requirement analysis, sprint discussions, feature development, debugging, testing, and project documentation.",
+        "Gained practical exposure to industry-standard development practices and front-end/back-end technologies."
+      ],
+      type: "work"
+    },
+    {
+      title: "Volunteer, Blood Donation Program",
+      subtitle: "Leo Club of Kathmandu Chhabdi Barahi, Kathmandu, Nepal",
+      date: "June 2025",
+      points: [
+        "Assisted with donor registration, participant coordination, and general event support during a community blood donation program.",
+        "Helped manage smooth program flow and contributed to a social service initiative promoting blood donation and community health awareness."
       ],
       type: "work"
     },
     {
       title: "BSc (Hons) Computer Science",
-      subtitle: "Herald College Kathmandu (Univ. of Wolverhampton)",
+      subtitle: "Herald College Kathmandu, affiliated with University of Wolverhampton, Kathmandu, Nepal",
       date: "2022 — 2025",
       points: [
         "Earned Honours degree in Computer Science, focusing on Software Engineering, Databases, and Intelligent Systems.",
         "Gained deep foundation in software patterns, data structures, algorithms, and team project management."
+      ],
+      type: "education"
+    },
+    {
+      title: "Computer Science Teacher",
+      subtitle: "Wonderland English Boarding School, Jhapa, Nepal",
+      date: "April 2020 — September 2021",
+      points: [
+        "Taught Computer Science to students up to Class 8, covering fundamental computer concepts and practical learning activities.",
+        "Prepared and delivered lessons to support students' understanding of computer fundamentals.",
+        "Maintained a positive learning environment through disciplined, supportive, and cooperative classroom practice."
+      ],
+      type: "work"
+    },
+    {
+      title: "Management (+2)",
+      subtitle: "Global Educational Academy, Damak, Jhapa, Nepal",
+      date: "2017 — 2019",
+      points: [
+        "Completed higher secondary education focusing on Business Management, Economics, and Accountancy."
       ],
       type: "education"
     }
