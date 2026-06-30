@@ -67,11 +67,11 @@ export const portfolioData: PortfolioData = {
     email: "pradeepkoirala07@gmail.com",
     github: "https://github.com/Koiralapradeep",
     linkedin: "https://www.linkedin.com/in/pradeep-koirala-b22636202/",
-    bioBrief: "Computer Science graduate and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, debugging, testing, and project documentation.",
+    bioBrief: "Computer Science graduate (BSc Hons from University of Wolverhampton / Herald College) and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, and custom dashboards.",
     bioLong: [
-      "I am a Computer Science graduate and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, debugging, testing, and project documentation.",
-      "My practical background includes building client-facing web applications, dashboard systems, and custom automation, combined with professional experience teaching Computer Science at the secondary and college level.",
-      "With a strong foundation in communication, coordination, and problem-solving, I focus on engineering clean, scalable code structures, responsive UI design, and production-ready deployments."
+      "I am a Computer Science graduate (BSc Hons from Herald College Kathmandu, affiliated with the University of Wolverhampton) and a Full Stack Developer with practical experience in building client-facing web applications, dashboard systems, and custom automation.",
+      "My background bridges full-stack engineering (MERN, SQL, Node.js) with educational experience teaching Computer Science at the secondary and college level (Grade 11-12).",
+      "I hold a strong foundation in coordination, problem-solving, and debugging. I thrive on translating business logic and workflows into clean, responsive interface components and robust, production-ready backend systems."
     ],
     stats: [
       { value: "6+", label: "Completed Projects" },
