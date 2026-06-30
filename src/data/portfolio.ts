@@ -92,12 +92,11 @@ export const portfolioData: PortfolioData = {
       caseStudy: {
         kicker: "Case Study • Enterprise Application",
         title: "Troyer Nepal Dashboard",
-        desc: "A full-stack, responsive dashboard application built for inventory control, tool requisitions, personnel scheduling, and workflow tracking. It streamlines logistics, audits tool transfers between sites, and manages employee rosters through a secure portal.",
+        desc: "A custom project management and scheduling dashboard for hydropower operations, incorporating Excel-based data handling, interactive Gantt charts, and real-time dashboard insights.",
         highlights: [
-          "Developed a lightweight backend database using PostgreSQL and Express to audit tool transfers between sites.",
-          "Implemented a fully responsive dashboard UI using Vanilla JS, HTML5, and CSS3 for real-time inventory control.",
-          "Constructed management reporting pages to track personnel schedules, tool requisitions, and active site workflows.",
-          "Designed secure user portal with role-based access for logistics managers, site engineers, and administrative staff."
+          "Built the Troyer Nepal Dashboard as a custom project management and scheduling dashboard for hydropower operations, incorporating Excel-based data handling, interactive Gantt charts, and real-time dashboard insights.",
+          "Designed and developed a companion employee portal with modules for profile management, transfer requests, and approval workflows.",
+          "Diagnosed and resolved complex layout and scrolling issues within a large-scale codebase, improving overall performance and usability."
         ],
         stack: ["Node.js", "Express", "PostgreSQL", "JavaScript", "HTML5", "CSS3", "SQL"],
         live: "#",
@@ -117,10 +116,8 @@ export const portfolioData: PortfolioData = {
         title: "Jurist Council Website",
         desc: "Developed a professional law firm website presenting legal services, lawyer profiles, and consultation booking functionality.",
         highlights: [
-          "Designed a refined interface focusing on trust, authority, and accessible content.",
-          "Structured SEO-friendly page paths mapping the firm's core legal specialties.",
-          "Integrated booking and contact workflows to capture incoming consultation requests.",
-          "Optimized assets and page speed for mobile networks."
+          "Developed a professional law firm website presenting legal services, lawyer profiles, and consultation booking functionality.",
+          "Implemented a responsive, mobile-friendly layout and an intuitive navigation structure to improve user experience across devices."
         ],
         stack: ["HTML", "CSS", "JavaScript", "Responsive Design", "SEO Integration"],
         live: "https://www.juristcouncil.com.np/",
