@@ -92,24 +92,43 @@ export default function Contact() {
 
     setFormStatus("sending");
 
-    // Simulate sending network request
-    setTimeout(() => {
-      // Trigger confetti if library loaded
-      import("canvas-confetti").then((module) => {
-        const confetti = module.default;
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#22d3ee", "#a855f7", "#6366f1"],
-        });
-      }).catch(() => {
-        // Silent catch if confetti is not installed yet
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/pradeepkoirala07@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `New Portfolio Message from ${formData.name}`
+        })
       });
 
-      setFormStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1500);
+      if (response.ok) {
+        // Trigger confetti
+        import("canvas-confetti").then((module) => {
+          const confetti = module.default;
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ["#22d3ee", "#a855f7", "#6366f1"],
+          });
+        }).catch(() => {});
+
+        setFormStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setFormStatus("error");
+        setTimeout(() => setFormStatus("idle"), 3000);
+      }
+    } catch (error) {
+      setFormStatus("error");
+      setTimeout(() => setFormStatus("idle"), 3000);
+    }
   };
 
   return (
@@ -319,9 +338,17 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={formStatus === "sending"}
-                    className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400 disabled:opacity-50 text-white font-semibold rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer"
+                    className={`px-8 py-4 bg-gradient-to-r disabled:opacity-50 text-white font-semibold rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 group cursor-pointer ${
+                      formStatus === "error"
+                        ? "from-red-600 to-rose-600"
+                        : "from-cyan-500 to-indigo-500 hover:from-cyan-400 hover:to-indigo-400"
+                    }`}
                   >
-                    {formStatus === "sending" ? "Transmitting..." : "Send Message"}
+                    {formStatus === "sending"
+                      ? "Transmitting..."
+                      : formStatus === "error"
+                      ? "Transmission Failed"
+                      : "Send Message"}
                     <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </button>
                 </Magnetic>
