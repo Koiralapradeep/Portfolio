@@ -215,6 +215,7 @@ export const portfolioData: PortfolioData = {
         stack: ["Python", "NLTK", "TensorFlow", "Pandas", "Scikit-Learn"],
         live: "https://github.com/Koiralapradeep/AI-ML-Project",
         code: "https://github.com/Koiralapradeep/AI-ML-Project"
+      }
     },
     {
       id: "aethercalc",
