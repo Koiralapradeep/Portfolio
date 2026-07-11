@@ -87,7 +87,7 @@ export const portfolioData: PortfolioData = {
       description: "A full-stack, responsive dashboard built for inventory control, tool requisitions, personnel scheduling, and workflow tracking.",
       icon: "Activity",
       tech: ["Node.js", "Express", "PostgreSQL", "JavaScript"],
-      live: "#",
+      live: "https://troyer-nepal.vercel.app/login",
       code: "https://github.com/Koiralapradeep/Troyer-Nepal",
       caseStudy: {
         kicker: "Case Study • Enterprise Application",
@@ -99,7 +99,7 @@ export const portfolioData: PortfolioData = {
           "Diagnosed and resolved complex layout and scrolling issues within a large-scale codebase, improving overall performance and usability."
         ],
         stack: ["Node.js", "Express", "PostgreSQL", "JavaScript", "HTML5", "CSS3", "SQL"],
-        live: "#",
+        live: "https://troyer-nepal.vercel.app/login",
         code: "https://github.com/Koiralapradeep/Troyer-Nepal"
       }
     },
