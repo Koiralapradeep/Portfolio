@@ -125,6 +125,29 @@ export const portfolioData: PortfolioData = {
       }
     },
     {
+      id: "skinai",
+      title: "Skin Cancer Detection AI",
+      description: "Deep learning convolutional neural network pipeline engineered for computer vision skin classification.",
+      icon: "Brain",
+      tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
+      live: "https://github.com/Koiralapradeep/AI-ML-Project",
+      code: "https://github.com/Koiralapradeep/AI-ML-Project",
+      caseStudy: {
+        kicker: "Case Study • Computer Vision AI",
+        title: "Skin Cancer Detection AI",
+        desc: "CNN-based classification pipeline with image enhancement and cross-validation workflows.",
+        highlights: [
+          "Developed image preprocessing pipelines using OpenCV to augment training sets and adjust contrasts.",
+          "Architected CNN models using TensorFlow/Keras, optimizing layers to achieve high classification metrics.",
+          "Implemented training validation loops with confusion matrices and ROC curves.",
+          "Structured pipeline inputs for repeatability on different clinical datasets."
+        ],
+        stack: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
+        live: "https://github.com/Koiralapradeep/AI-ML-Project",
+        code: "https://github.com/Koiralapradeep/AI-ML-Project"
+      }
+    },
+    {
       id: "resume",
       title: "Resume Generator",
       description: "Interactive full-stack resume builder with dynamic live preview, template switching, and automated exports.",
@@ -169,29 +192,6 @@ export const portfolioData: PortfolioData = {
         stack: ["React.js", "Node.js", "Express.js", "MongoDB Atlas", "Socket.IO", "Tailwind CSS", "JWT"],
         live: "https://emrs-frontend-delta.vercel.app",
         code: "https://github.com/Koiralapradeep/EMRS-frontend"
-      }
-    },
-    {
-      id: "skinai",
-      title: "Skin Cancer Detection AI",
-      description: "Deep learning convolutional neural network pipeline engineered for computer vision skin classification.",
-      icon: "Brain",
-      tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
-      live: "https://github.com/Koiralapradeep/AI-ML-Project",
-      code: "https://github.com/Koiralapradeep/AI-ML-Project",
-      caseStudy: {
-        kicker: "Case Study • Computer Vision AI",
-        title: "Skin Cancer Detection AI",
-        desc: "CNN-based classification pipeline with image enhancement and cross-validation workflows.",
-        highlights: [
-          "Developed image preprocessing pipelines using OpenCV to augment training sets and adjust contrasts.",
-          "Architected CNN models using TensorFlow/Keras, optimizing layers to achieve high classification metrics.",
-          "Implemented training validation loops with confusion matrices and ROC curves.",
-          "Structured pipeline inputs for repeatability on different clinical datasets."
-        ],
-        stack: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
-        live: "https://github.com/Koiralapradeep/AI-ML-Project",
-        code: "https://github.com/Koiralapradeep/AI-ML-Project"
       }
     },
     {
