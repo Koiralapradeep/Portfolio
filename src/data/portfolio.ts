@@ -149,24 +149,25 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "emrs",
-      title: "Employee Roster & Management",
-      description: "Robust business operations portal with secure auth, employee details tracking, and shift scheduling modules.",
+      title: "Employee Management & Rostering (EMRS)",
+      description: "Full-stack enterprise-grade ShiftSwap platform featuring calendar scheduling, leave workflows, and WebSocket notifications.",
       icon: "Users",
-      tech: ["MongoDB", "Express", "React", "Node.js"],
-      live: "https://github.com/Koiralapradeep/EMRS-frontend",
+      tech: ["React", "Node.js", "MongoDB", "Socket.IO"],
+      live: "https://emrs-frontend-delta.vercel.app",
       code: "https://github.com/Koiralapradeep/EMRS-frontend",
       caseStudy: {
-        kicker: "Case Study • Admin Platform",
-        title: "Employee Management & Rostering (EMRS)",
-        desc: "A MERN stack portal handling scheduling workflows, protected routing structures, and operations reporting.",
+        kicker: "Case Study • Enterprise Operations",
+        title: "Employee Management & Rostering System (EMRS) / ShiftSwap",
+        desc: "A full-stack, enterprise-grade Employee Management and Smart Rostering platform designed to streamline workforce scheduling, leave administration, and internal communications. It addresses real-world scheduling conflicts by introducing a real-time shift swapping engine and an automated availability matcher.",
         highlights: [
-          "Configured secure authentication schema using JSON Web Tokens (JWT) and encrypted cookies.",
-          "Constructed drag-and-drop roster sheets mapping coordinates to database schedules.",
-          "Built full CRUD interfaces for managing employee profiles, permissions, and salary categories.",
-          "Optimized MongoDB queries to compile weekly summaries on demand."
+          "Role-Based Dashboards (RBAC): Admin (global config), Manager (roster creation, approvals), and Employee (calendar views, availability setting, swap invitations).",
+          "Smart Shift Swapping Engine: Peer-to-peer shift swap requests with automated availability conflict checks and a 2-step approval workflow (peer + manager).",
+          "Real-Time Communication: Direct peer-to-peer messaging, global announcements, and live push notifications powered by Socket.IO WebSockets.",
+          "Secure Auth & Infrastructure: Dual-layer traditional JWT with encrypted cookie storage and Single Sign-On (SSO) via Google OAuth 2.0.",
+          "DevOps & Hosting: Client hosted on Vercel, REST API backend containerized on Render, and databases deployed via replica-set MongoDB Atlas clusters."
         ],
-        stack: ["MongoDB", "Express", "React", "Node.js", "CSS Modules"],
-        live: "https://github.com/Koiralapradeep/EMRS-frontend",
+        stack: ["React.js", "Node.js", "Express.js", "MongoDB Atlas", "Socket.IO", "Tailwind CSS", "JWT"],
+        live: "https://emrs-frontend-delta.vercel.app",
         code: "https://github.com/Koiralapradeep/EMRS-frontend"
       }
     },
