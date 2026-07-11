@@ -74,7 +74,7 @@ export const portfolioData: PortfolioData = {
       "I hold a strong foundation in coordination, problem-solving, and debugging. I thrive on translating business logic and workflows into clean, responsive interface components and robust, production-ready backend systems."
     ],
     stats: [
-      { value: "6+", label: "Completed Projects" },
+      { value: "7+", label: "Completed Projects" },
       { value: "2+", label: "Years Programming" },
       { value: "15+", label: "Technologies Used" },
       { value: "∞", label: "Learning Mindset" }
