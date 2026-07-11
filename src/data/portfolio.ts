@@ -215,6 +215,28 @@ export const portfolioData: PortfolioData = {
         stack: ["Python", "NLTK", "TensorFlow", "Pandas", "Scikit-Learn"],
         live: "https://github.com/Koiralapradeep/AI-ML-Project",
         code: "https://github.com/Koiralapradeep/AI-ML-Project"
+    },
+    {
+      id: "aethercalc",
+      title: "Aether Calc",
+      description: "A premium responsive calculator featuring glassmorphism design, Web Audio sound effects, and operation history tape.",
+      icon: "Calculator",
+      tech: ["HTML5", "CSS3", "JavaScript"],
+      live: "https://calculator-snowy-ten-76.vercel.app/",
+      code: "https://github.com/Koiralapradeep/calculator",
+      caseStudy: {
+        kicker: "Case Study • Web Tool",
+        title: "Aether Calc - Premium Calculator",
+        desc: "A highly professional, responsive standard and scientific calculator designed for mathematicians and professionals. It integrates glassmorphic UI panels with custom Web Audio keypress sound effects and a sliding history tape panel.",
+        highlights: [
+          "Developed dual-mode layout: standard keypad and scientific panel (supporting trigonometric, logarithmic, and power functions).",
+          "Engineered an interactive Web Audio API synth to generate clean, dynamic keypress sound effects in real-time.",
+          "Implemented a sliding History Tape panel with clear controls to store, review, and clear calculation sequences.",
+          "Designed responsive styling with ambient animated glassmorphic blobs that scale dynamically to any device screen."
+        ],
+        stack: ["HTML5", "CSS3", "JavaScript", "Web Audio API", "Vercel"],
+        live: "https://calculator-snowy-ten-76.vercel.app/",
+        code: "https://github.com/Koiralapradeep/calculator"
       }
     }
   ],
