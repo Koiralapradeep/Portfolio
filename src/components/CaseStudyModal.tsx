@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, CheckCircle } from "lucide-react";
+import { X, ArrowUpRight, CheckCircle, Lock } from "lucide-react";
 import { ProjectCaseStudy } from "@/data/portfolio";
 
 // Custom inline SVG icons to prevent lucide-react brand deprecation errors
@@ -136,29 +136,42 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
             </div>
 
             {/* Modal Actions Footer */}
-            <div className="p-6 md:p-8 bg-slate-950/80 border-t border-white/10 flex flex-col sm:flex-row gap-3 justify-end items-stretch sm:items-center">
-              {caseStudy.live && caseStudy.live !== "#" && (
-                <a
-                  href={caseStudy.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl font-medium shadow-md shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2 group"
-                >
-                  Live Demo
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+            <div className="p-6 md:p-8 bg-slate-950/80 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between items-stretch sm:items-center">
+              {caseStudy.codePrivateReason ? (
+                <div className="flex items-center gap-2 text-left text-slate-400 sm:max-w-[60%]">
+                  <Lock className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium leading-tight">
+                    {caseStudy.codePrivateReason}
+                  </span>
+                </div>
+              ) : (
+                <div className="hidden sm:block flex-1" />
               )}
-              {caseStudy.code && (
-                <a
-                  href={caseStudy.code}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                  Source Code
-                </a>
-              )}
+              
+              <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+                {caseStudy.live && caseStudy.live !== "#" && (
+                  <a
+                    href={caseStudy.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl font-medium shadow-md shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2 group"
+                  >
+                    Live Demo
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                )}
+                {caseStudy.code && (
+                  <a
+                    href={caseStudy.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    Source Code
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         </div>

@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { portfolioData, Project } from "@/data/portfolio";
-import { Activity, FileText, Users, Brain, MessageSquare, Scale, ArrowUpRight, Calculator } from "lucide-react";
+import { Activity, FileText, Users, Brain, MessageSquare, Scale, ArrowUpRight, Calculator, Lock } from "lucide-react";
 import CaseStudyModal from "./CaseStudyModal";
 
 // Map project ID to appropriate Lucide icon
@@ -179,7 +179,7 @@ function ProjectCard({ project, onOpenModal }: { project: Project; onOpenModal: 
           </div>
           <div className="h-4 w-[1px] bg-card-border hidden sm:block" />
           
-          {project.code && (
+          {project.code ? (
             <a
               href={project.code}
               target="_blank"
@@ -189,6 +189,15 @@ function ProjectCard({ project, onOpenModal }: { project: Project; onOpenModal: 
             >
               <GithubIcon className="w-4 h-4" />
             </a>
+          ) : (
+            project.codePrivateReason && (
+              <span
+                className="p-1.5 text-slate-500 dark:text-slate-600 cursor-help"
+                title={project.codePrivateReason}
+              >
+                <Lock className="w-4 h-4" />
+              </span>
+            )
           )}
         </div>
       </div>

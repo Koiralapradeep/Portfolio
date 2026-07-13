@@ -6,6 +6,7 @@ export interface ProjectCaseStudy {
   stack: string[];
   live: string;
   code: string;
+  codePrivateReason?: string;
 }
 
 export interface Project {
@@ -16,6 +17,7 @@ export interface Project {
   tech: string[];
   live: string;
   code: string;
+  codePrivateReason?: string;
   caseStudy: ProjectCaseStudy;
 }
 
@@ -67,7 +69,7 @@ export const portfolioData: PortfolioData = {
     email: "pradeepkoirala07@gmail.com",
     github: "https://github.com/Koiralapradeep",
     linkedin: "https://www.linkedin.com/in/pradeep-koirala-b22636202/",
-    bioBrief: "Computer Science graduate (BSc Hons from University of Wolverhampton / Herald College) and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, and custom dashboards.",
+    bioBrief: "Computer Science graduate and Full Stack Developer with hands-on experience in full-stack web development, UI implementation, backend functionality, teaching, and active community and civic-technology volunteering.",
     bioLong: [
       "I am a Computer Science graduate (BSc Hons from Herald College Kathmandu, affiliated with the University of Wolverhampton) and a Full Stack Developer with practical experience in building client-facing web applications, dashboard systems, and custom automation.",
       "My background bridges full-stack engineering (MERN, SQL, Node.js) with educational experience teaching Computer Science at the secondary and college level (Grade 11-12).",
@@ -101,6 +103,29 @@ export const portfolioData: PortfolioData = {
         stack: ["Node.js", "Express", "PostgreSQL", "JavaScript", "HTML5", "CSS3", "SQL"],
         live: "https://troyer-nepal.vercel.app/login",
         code: "https://github.com/Koiralapradeep/Troyer-Nepal"
+      }
+    },
+    {
+      id: "youthcouncil",
+      title: "Budhanilkantha Municipality Youth Council Website",
+      description: "Contributed as a website team member to the planning, design, development, and implementation of the official Municipal Youth Council website.",
+      icon: "Users",
+      tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+      live: "https://budhanilkanthayouthcouncil.com",
+      code: "",
+      codePrivateReason: "This project is internally connected with the local government, so the source code is not public.",
+      caseStudy: {
+        kicker: "Case Study • Government Platform",
+        title: "Municipal Youth Council Website",
+        desc: "A secure digital platform and content management system for the Budhanilkantha Municipality Youth Council, streamlining access to municipal programs, resources, and youth engagement initiatives.",
+        highlights: [
+          "Contributed as a website team member to the planning, design, development, and implementation of the official Municipal Youth Council website (budhanilkanthayouthcouncil.com), covering frontend and backend development, database integration, and content management.",
+          "Provided ongoing technical support, helping establish the Council's digital platform and improve public access to its information and initiatives."
+        ],
+        stack: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "API Integration"],
+        live: "https://budhanilkanthayouthcouncil.com",
+        code: "",
+        codePrivateReason: "This project is internally connected with the local government, so the source code is not public."
       }
     },
     {
@@ -292,12 +317,31 @@ export const portfolioData: PortfolioData = {
   ],
   experience: [
     {
+      title: "Volunteer, Municipal AI Governance Conference 2026",
+      subtitle: "Budhanilkantha Municipality Youth Council, Kathmandu, Nepal",
+      date: "June 2026",
+      points: [
+        "Served as a volunteer for the Municipal AI Governance Conference 2026, themed \"Reshaping Municipal Governance in the Age of Artificial Intelligence.\"",
+        "Supported conference logistics and coordination, contributing to the successful execution of the event."
+      ],
+      type: "work"
+    },
+    {
       title: "Computer Science Teacher (Grade 11–12)",
       subtitle: "Ekata James English Academy, Kathmandu, Nepal",
       date: "February 2026 — Present",
       points: [
         "Teach Computer Science to Class XI and XII students, delivering two periods per day.",
         "Maintain professional classroom conduct, support student learning, and coordinate positively with staff and college administration."
+      ],
+      type: "work"
+    },
+    {
+      title: "IT Support Volunteer, Stakeholder Interaction Program",
+      subtitle: "Pan Himalaya Energy Limited, Kathmandu, Nepal",
+      date: "January 2026",
+      points: [
+        "Provided IT support during a stakeholder interaction program for a hydropower project, attended by local stakeholders, company representatives, staff, and contractors."
       ],
       type: "work"
     },
