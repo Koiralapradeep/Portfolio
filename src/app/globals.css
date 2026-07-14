@@ -122,3 +122,34 @@ body {
 .glow-card:hover {
   box-shadow: 0 0 30px rgba(6, 182, 212, 0.08);
 }
+
+/* Vertical Text Utility */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Halftone Pattern Utilities (Dual Tone) */
+.halftone-pattern-light {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+.halftone-pattern-dark {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.95) 1.5px, transparent 1.5px), linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 1.5px, transparent 1.5px);
+  background-size: 6px 6px;
+}
+
+/* Shifting static scanlines for halftone grid animation */
+@keyframes halftone-static {
+  0% { background-position: 0px 0px, 4px 4px; }
+  20% { background-position: 2px 4px, -2px -2px; }
+  40% { background-position: -4px -2px, 4px 0px; }
+  60% { background-position: 4px 2px, -4px 4px; }
+  80% { background-position: -2px 4px, 2px -4px; }
+  100% { background-position: 0px 0px, 4px 4px; }
+}
+
+.halftone-jitter {
+  animation: halftone-static 0.12s infinite steps(4);
+}

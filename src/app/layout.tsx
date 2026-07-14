@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { ThemeProvider } from "@/app/providers";
 import SmoothScroll from "@/components/SmoothScroll";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 // Premium font pairing: Inter for UI/Body, Manrope for Headings/Stats
@@ -43,6 +44,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#030014] text-slate-200 selection:bg-cyan-500/20">
         <ThemeProvider>
+          <Preloader />
           {/* Subtle noise paper texture overlay */}
           <div className="noise-overlay" />
           <SmoothScroll>

@@ -1,89 +1,93 @@
 "use client";
 
-import React from "react";
-import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, FileText } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import Magnetic from "./Magnetic";
 
-// Dynamic import of 3D Canvas component to optimize page load speeds
-const ThreeCanvas = dynamic(() => import("./ThreeCanvas"), {
-  ssr: false,
-  loading: () => <div className="absolute inset-0 bg-[#030014]/30" />,
-});
+// Premium grayscaled, pixelated circular portrait of the developer
+function Portrait() {
+  const [processedSrc, setProcessedSrc] = useState<string>("/pradeep.jpg");
 
-// Premium interactive Mock IDE / Terminal Window representing real development
-function MockIDE() {
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/pradeep.jpg";
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      // Downsample photo to create a grid of solid square tiles (cubes)
+      const pixelSize = 6;
+      canvas.width = Math.floor(img.width / pixelSize);
+      canvas.height = Math.floor(img.height / pixelSize);
+      
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+
+      // Key out near-white background pixels and convert remaining blocks to high-contrast grayscale
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        if (r > 210 && g > 210 && b > 210) {
+          data[i + 3] = 0; // Make background transparent
+        } else {
+          // Grayscale conversion
+          let gray = 0.3 * r + 0.59 * g + 0.11 * b;
+          // Boost contrast for retro digital aesthetics
+          gray = (gray - 128) * 1.8 + 128;
+          gray = Math.max(0, Math.min(255, gray));
+          
+          data[i] = gray;
+          data[i + 1] = gray;
+          data[i + 2] = gray;
+          // Highlights get slightly lower opacity to blend with background grids
+          data[i + 3] = gray > 180 ? 150 : 255;
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Scale up the downsampled canvas with imageSmoothingEnabled = false (preserves blocky edges)
+      const scaleCanvas = document.createElement("canvas");
+      scaleCanvas.width = img.width;
+      scaleCanvas.height = img.height;
+      const sCtx = scaleCanvas.getContext("2d");
+      if (sCtx) {
+        sCtx.imageSmoothingEnabled = false;
+        (sCtx as any).mozImageSmoothingEnabled = false;
+        (sCtx as any).webkitImageSmoothingEnabled = false;
+        (sCtx as any).msImageSmoothingEnabled = false;
+        sCtx.drawImage(canvas, 0, 0, scaleCanvas.width, scaleCanvas.height);
+        setProcessedSrc(scaleCanvas.toDataURL());
+      }
+    };
+  }, []);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95, y: 30 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-      className="relative w-full max-w-md rounded-2xl border border-white/[0.08] bg-[#090620]/65 backdrop-blur-xl shadow-2xl overflow-hidden font-mono text-[11px] sm:text-xs text-slate-300 glow-card"
-    >
-      {/* Title Bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#0c0926]/80 border-b border-white/[0.06] select-none">
-        <div className="flex items-center gap-1.5">
-          {/* Mac-like Window controls */}
-          <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-          <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-          <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-        </div>
-        <span className="text-[10px] text-slate-500 tracking-wide font-medium">pradeep.ts</span>
-        <div className="w-10" />
-      </div>
-
-      {/* Editor Content */}
-      <div className="p-5 space-y-2 overflow-x-auto select-none leading-relaxed text-left font-mono">
-        <div>
-          <span className="text-pink-400">import</span> <span className="text-cyan-400">Developer</span> <span className="text-pink-400">from</span> <span className="text-emerald-400">"fullstack"</span><span className="text-slate-500">;</span>
-        </div>
-        <br />
-        <div>
-          <span className="text-pink-400">const</span> <span className="text-purple-400">profile</span> = <span className="text-slate-400">&#123;</span>
-        </div>
-        <div className="pl-4">
-          <span className="text-slate-400">name:</span> <span className="text-emerald-400">"Pradeep Koirala"</span>,
-        </div>
-        <div className="pl-4">
-          <span className="text-slate-400">role:</span> <span className="text-emerald-400">"Full Stack Developer"</span>,
-        </div>
-        <div className="pl-4">
-          <span className="text-slate-400">stack:</span> <span className="text-slate-400">[</span>
-          <span className="text-cyan-400">"React"</span>, <span className="text-cyan-400">"Node.js"</span>, <span className="text-cyan-400">"SQL/NoSQL"</span>
-          <span className="text-slate-400">]</span>,
-        </div>
-        <div className="pl-4">
-          <span className="text-slate-400">volunteering:</span> <span className="text-amber-400">true</span>
-        </div>
-        <div>
-          <span className="text-slate-400">&#125;</span><span className="text-slate-500">;</span>
-        </div>
-        <br />
-        <div>
-          <span className="text-pink-400">const</span> <span className="text-purple-400">status</span> = <span className="text-emerald-400">"Ready to build scalable APIs"</span><span className="text-slate-500">;</span>
-        </div>
-        <br />
-        <div>
-          <span className="text-cyan-400">Developer</span>.<span className="text-indigo-400">initialize</span>(<span className="text-purple-400">profile</span>)<span className="text-slate-500">;</span>
-        </div>
-      </div>
-
-      {/* Mini Status bar */}
-      <div className="px-4 py-2 bg-[#0c0926]/60 border-t border-white/[0.04] flex items-center justify-between text-[10px] text-slate-500 select-none">
-        <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          production
-        </span>
-        <span>TypeScript • UTF-8</span>
-      </div>
-    </motion.div>
+    <div className="relative w-full h-full flex items-center justify-center lg:justify-end pr-0 lg:pr-12 pointer-events-none select-none">
+      {/* Pixelated blocky portrait inside a feathered circular mask silhouette */}
+      <img
+        src={processedSrc}
+        alt="Pradeep Koirala"
+        className="h-[75%] lg:h-[90%] w-auto object-contain filter grayscale contrast-[1.7] brightness-[0.75] opacity-75 mix-blend-screen"
+        style={{
+          maskImage: "radial-gradient(circle at center, black 25%, transparent 68%)",
+          WebkitMaskImage: "radial-gradient(circle at center, black 25%, transparent 68%)",
+          imageRendering: "pixelated",
+        }}
+      />
+      {/* Heavy halftone shading pattern overlay only on the photo - static for eye comfort */}
+      <div className="absolute inset-0 halftone-pattern-dark opacity-[0.96] mix-blend-multiply pointer-events-none" />
+    </div>
   );
 }
 
 export default function Hero() {
-  const { name, title, subTitle } = portfolioData.personal;
+  const { name, title } = portfolioData.personal;
+  const [isHeroHovered, setIsHeroHovered] = useState(false);
 
   const scrollToSection = (id: string) => {
     const target = document.getElementById(id);
@@ -92,79 +96,142 @@ export default function Hero() {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.25,
+      }
+    }
+  };
+
+  const maskRevealVariants = {
+    hidden: { y: "100%" },
+    visible: {
+      y: 0,
+      transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] as const }
+    }
+  };
+
+  const textRevealVariants = {
+    hidden: { y: 25, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" as const }
+    }
+  };
+
+  // Split heading into letters for interactive popup hover
+  const renderInteractiveLetters = (text: string, customClass = "") => {
+    return text.split("").map((char, idx) => {
+      if (char === " ") return <span key={idx}>&nbsp;</span>;
+      return (
+        <motion.span
+          key={idx}
+          className={`inline-block cursor-default select-none transition-colors duration-150 ${customClass}`}
+          whileHover={{
+            scale: 1.15,
+            y: -8,
+            color: "#ffffff",
+          }}
+          transition={{ type: "spring", stiffness: 450, damping: 10 }}
+        >
+          {char}
+        </motion.span>
+      );
+    });
+  };
+
+  // Split text into words for interactive popup hover
+  const renderInteractiveWords = (text: string, customClass = "") => {
+    return text.split(" ").map((word, idx) => (
+      <motion.span
+        key={idx}
+        className={`inline-block cursor-default transition-all duration-150 ${customClass}`}
+        whileHover={{
+          scale: 1.06,
+          y: -2,
+          color: "#ffffff",
+        }}
+        transition={{ type: "spring", stiffness: 350, damping: 15 }}
+      >
+        {word}&nbsp;
+      </motion.span>
+    ));
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background text-foreground py-20 lg:py-0"
+      onMouseEnter={() => setIsHeroHovered(true)}
+      onMouseLeave={() => setIsHeroHovered(false)}
+      className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#0a0a0c] text-foreground pt-32 pb-10"
     >
-      {/* 3D Interactive Particle Backdrop */}
-      <ThreeCanvas />
+      {/* Full-background halftone light square grid overlay - static for eye comfort */}
+      <div className="absolute inset-0 halftone-pattern-light opacity-30 pointer-events-none z-0" />
 
-      {/* Soft background grid texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+      {/* Wholesome Absolute Portrait with circular feathered silhouette mask */}
+      <div className="absolute right-0 bottom-0 top-0 w-full lg:w-[60%] h-full z-0 select-none pointer-events-none overflow-hidden">
+        <Portrait />
+      </div>
 
-      {/* Glowing Accents */}
-      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-purple-600/5 blur-[130px] rounded-full pointer-events-none z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-600/5 blur-[150px] rounded-full pointer-events-none z-0" />
-
-      {/* Main Hero Container (Split Grid) */}
-      <div className="relative max-w-6xl mx-auto px-6 z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center min-h-[75vh] pt-24 lg:pt-16 pb-12">
+      {/* Main Content Grid */}
+      <div className="relative max-w-6xl mx-auto px-6 z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center flex-1">
         
-        {/* Left Column: Copy & Actions (Col 7) */}
-        <div className="lg:col-span-7 text-left flex flex-col items-start justify-center">
-          
-          {/* Animated tag pill */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.06] backdrop-blur-md mb-6"
-          >
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest font-mono">
-              Open to projects
-            </span>
-          </motion.div>
+        {/* Left Column: Copy & Actions */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="lg:col-span-8 text-left flex flex-col items-start justify-center relative z-10"
+        >
+          {/* Top-left Stacked Subtitles (Mask Reveal) */}
+          <div className="space-y-1.5 mb-6 overflow-hidden">
+            <div className="overflow-hidden">
+              <motion.span 
+                variants={maskRevealVariants}
+                className="text-xs sm:text-sm font-semibold tracking-[0.2em] text-[#c3fffc] font-mono block uppercase"
+              >
+                {renderInteractiveWords(title)}
+              </motion.span>
+            </div>
+            <div className="overflow-hidden">
+              <motion.span 
+                variants={maskRevealVariants}
+                className="text-[10px] sm:text-xs font-semibold tracking-wider text-slate-500 block uppercase"
+              >
+                {renderInteractiveWords("SCALABLE BACKENDS • REFINED USER EXPERIENCES • CUSTOM AUTOMATIONS")}
+              </motion.span>
+            </div>
+          </div>
 
-          {/* Animated Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 leading-none"
-          >
-            Hi, I am{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-indigo-400 drop-shadow-sm font-sans">
-              {name}
-            </span>
-          </motion.h1>
-
-          {/* Professional Role Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg sm:text-xl md:text-2xl font-semibold text-slate-400 mb-6 font-mono"
-          >
-            {title}
-          </motion.h2>
-
-          {/* Dynamic Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-base sm:text-lg text-slate-400 max-w-xl leading-relaxed mb-10"
-          >
-            {subTitle}
-          </motion.p>
+          {/* Massive Name Typography (Awwwards Mask Reveal style with letter hover popup) */}
+          <h1 className="text-6xl sm:text-7xl md:text-8xl xl:text-[100px] font-black leading-none tracking-tighter text-left uppercase select-none mb-6">
+            <div className="overflow-hidden py-1">
+              <motion.span 
+                variants={maskRevealVariants} 
+                className="block text-slate-100 font-light tracking-wide"
+              >
+                {renderInteractiveLetters("PRADEEP")}
+              </motion.span>
+            </div>
+            <div className="overflow-hidden py-1">
+              <motion.span 
+                variants={maskRevealVariants} 
+                className="block text-[#c3fffc] font-black"
+              >
+                {renderInteractiveLetters("KOIRALA.")}
+              </motion.span>
+            </div>
+          </h1>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
+            variants={textRevealVariants}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mt-6"
           >
             {/* View Projects - Main CTA */}
             <Magnetic range={30}>
@@ -193,38 +260,49 @@ export default function Hero() {
                 download="Pradeep_Koirala_Resume.pdf"
                 className="px-5 py-3.5 bg-white/[0.02] border border-white/[0.05] hover:bg-white/[0.04] text-slate-400 hover:text-white text-sm font-medium transition-all flex items-center justify-center gap-2 cursor-pointer rounded-xl"
               >
-                <FileText className="w-4.5 h-4.5 text-cyan-400" />
+                <FileText className="w-4.5 h-4.5 text-[#c3fffc]" />
                 CV
               </a>
             </Magnetic>
           </motion.div>
-        </div>
-
-        {/* Right Column: Interactive Mock IDE Window (Col 5) */}
-        <div className="lg:col-span-5 w-full flex justify-center items-center">
-          <MockIDE />
-        </div>
+        </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 1, 0] }}
-        transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-        onClick={() => scrollToSection("about")}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 cursor-pointer flex flex-col items-center gap-1 z-10 pointer-events-auto hidden md:flex"
+      {/* Far Right: Vertical achievements/developer badge */}
+      <motion.div 
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="absolute right-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-6 select-none z-10"
       >
-        <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-widest font-mono">
-          Scroll Down
+        <div className="h-20 w-[1px] bg-white/10" />
+        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-slate-500 vertical-text py-2">
+          {renderInteractiveLetters("KOIRALA'S PORTFOLIO")}
         </span>
-        <div className="w-5 h-8 border border-slate-600 rounded-full flex justify-center p-1">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-1 bg-cyan-400 rounded-full"
-          />
-        </div>
+        <div className="h-20 w-[1px] bg-white/10" />
       </motion.div>
+
+      {/* Bottom info bar */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 w-full mt-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[10px] sm:text-xs font-mono text-slate-500 uppercase tracking-wider"
+        >
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <span>{renderInteractiveWords("■ BSc (Hons) Computer Science")}</span>
+            <span>{renderInteractiveWords("■ Based in Kathmandu, Nepal")}</span>
+            <span>{renderInteractiveWords("■ Open to Global Projects")}</span>
+          </div>
+          <span 
+            onClick={() => scrollToSection("about")}
+            className="tracking-widest text-[#c3fffc] font-bold cursor-pointer hover:text-cyan-300 transition-colors flex items-center gap-1"
+          >
+            {renderInteractiveLetters("▼")} {renderInteractiveLetters("SCROLL")}
+          </span>
+        </motion.div>
+      </div>
     </section>
   );
 }
