@@ -520,7 +520,6 @@ const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 export default function Projects() {
   const { projects } = portfolioData;
-  const numProjects = projects.length;
   
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -551,21 +550,6 @@ export default function Projects() {
       id="projects" 
       className="relative bg-background text-foreground py-20 border-t border-white/[0.02] overflow-hidden"
     >
-      {/* Mobile-only Sticky Progress Bar */}
-      <div className="sticky top-[72px] z-30 w-full bg-[#030014]/90 backdrop-blur-md border-y border-white/[0.05] py-3 px-6 flex justify-between items-center lg:hidden">
-        <span className="text-[10px] font-mono font-bold tracking-widest text-cyan-400">
-          0{activeIdx + 1} / 0{numProjects}
-        </span>
-        <span className="text-[10px] uppercase font-mono tracking-widest text-slate-350 font-bold truncate max-w-[180px]">
-          {projects[activeIdx]?.title}
-        </span>
-        <div className="w-20 h-1 bg-slate-900 rounded-full overflow-hidden border border-white/[0.04]">
-          <div 
-            className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 transition-all duration-305"
-            style={{ width: `${((activeIdx + 1) / numProjects) * 100}%` }}
-          />
-        </div>
-      </div>
 
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Soft background glow */}
