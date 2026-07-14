@@ -10,9 +10,8 @@ function ParticleCloud() {
   const count = 1200;
 
   // Generate particle positions on a sphere surface with slight noise
-  const [positions, speeds] = useMemo(() => {
+  const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
-    const spd = new Float32Array(count);
     
     for (let i = 0; i < count; i++) {
       const u = Math.random();
@@ -24,41 +23,22 @@ function ParticleCloud() {
       pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       pos[i * 3 + 2] = r * Math.cos(phi);
-
-      spd[i] = 0.2 + Math.random() * 0.8;
     }
-    return [pos, spd];
+    return pos;
   }, []);
 
-  // Animate rotation & morph particles slightly
+  // Animate rotation & pulse scale for a subtle dynamic wave effect (highly optimized)
   useFrame((state) => {
     if (!pointsRef.current) return;
     const time = state.clock.getElapsedTime();
     
     // Slow rotation
-    pointsRef.current.rotation.y = time * 0.05;
-    pointsRef.current.rotation.x = time * 0.02;
+    pointsRef.current.rotation.y = time * 0.04;
+    pointsRef.current.rotation.x = time * 0.015;
 
-    // Small waves based on sinusoids
-    const posAttribute = pointsRef.current.geometry.attributes.position;
-    if (posAttribute) {
-      const arr = posAttribute.array as Float32Array;
-      for (let i = 0; i < count; i++) {
-        const idx = i * 3;
-        const speed = speeds[i];
-        // Morph slightly outwards
-        const originalRadius = Math.sqrt(
-          arr[idx] * arr[idx] + 
-          arr[idx + 1] * arr[idx + 1] + 
-          arr[idx + 2] * arr[idx + 2]
-        );
-        const wave = Math.sin(time * 0.5 * speed + originalRadius) * 0.002;
-        arr[idx] += arr[idx] * wave;
-        arr[idx + 1] += arr[idx + 1] * wave;
-        arr[idx + 2] += arr[idx + 2] * wave;
-      }
-      posAttribute.needsUpdate = true;
-    }
+    // Pulse scale mathematically to emulate expansion/contraction wave (highly optimized)
+    const scaleVal = 1.0 + Math.sin(time * 0.35) * 0.03;
+    pointsRef.current.scale.set(scaleVal, scaleVal, scaleVal);
   });
 
   return (

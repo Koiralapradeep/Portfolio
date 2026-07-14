@@ -29,7 +29,6 @@
 
 /* Global resets & scroll behaviors */
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 85px;
 }
 

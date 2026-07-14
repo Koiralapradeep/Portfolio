@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Manrope } from "next/font/google";
 import { ThemeProvider } from "@/app/providers";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 // Premium font pairing: Inter for UI/Body, Manrope for Headings/Stats
@@ -38,14 +39,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${manrope.variable} h-full antialiased dark`}
-      style={{ scrollBehavior: "smooth" }}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-[#030014] text-slate-200 selection:bg-cyan-500/20">
         <ThemeProvider>
           {/* Subtle noise paper texture overlay */}
           <div className="noise-overlay" />
-          {children}
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
         </ThemeProvider>
       </body>
     </html>
