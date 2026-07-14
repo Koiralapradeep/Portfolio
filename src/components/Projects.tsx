@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { portfolioData, Project } from "@/data/portfolio";
 import { Activity, FileText, Users, Brain, MessageSquare, Scale, ArrowUpRight, Calculator, Lock, Gamepad2 } from "lucide-react";
 import CaseStudyModal from "./CaseStudyModal";
@@ -35,20 +35,16 @@ function ProjectCard({
   project,
   onOpenModal,
   isActive,
-  idx,
 }: {
   project: Project;
   onOpenModal: (p: Project) => void;
   isActive: boolean;
-  idx: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-
-  const isAlternate = idx % 2 === 1;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -104,7 +100,7 @@ function ProjectCard({
       
       case "youthcouncil":
         return (
-          <div className="p-4 bg-slate-950/80 rounded-xl border border-white/[0.04] space-y-2 pointer-events-none select-none font-mono text-[9px] text-slate-500 shadow-inner">
+          <div className="p-4 bg-slate-955/80 rounded-xl border border-white/[0.04] space-y-2 pointer-events-none select-none font-mono text-[9px] text-slate-500 shadow-inner">
             <div className="flex justify-between text-indigo-400 border-b border-white/[0.06] pb-1.5 font-semibold uppercase tracking-wider text-[8px]">
               <span>Youth Council DB</span>
               <span className="flex items-center gap-1">
@@ -181,7 +177,7 @@ function ProjectCard({
           <div className="p-4 bg-slate-950/80 rounded-xl border border-white/[0.04] space-y-2 pointer-events-none select-none font-mono text-[9px] text-slate-500 shadow-inner">
             <div className="flex justify-between text-pink-400 border-b border-white/[0.06] pb-1.5 font-semibold uppercase tracking-wider text-[8px]">
               <span>Cancer Detection AI</span>
-              <span className="text-rose-400 animate-pulse">Scanning</span>
+              <span className="text-rose-455 animate-pulse">Scanning</span>
             </div>
             <div className="relative h-12 w-full bg-slate-900 rounded border border-white/[0.03] overflow-hidden flex items-center justify-center">
               <div className="absolute inset-0 bg-cyan-500/5 grid-mesh opacity-40" />
@@ -193,7 +189,7 @@ function ProjectCard({
             </div>
             <div className="flex justify-between text-[8px]">
               <span>Malignant Prob:</span>
-              <span className="text-rose-400 font-bold">98.42%</span>
+              <span className="text-rose-455 font-bold">98.42%</span>
             </div>
           </div>
         );
@@ -251,7 +247,7 @@ function ProjectCard({
               <span>NLP Sentiment Parser</span>
               <span className="text-indigo-400">NLTK</span>
             </div>
-            <div className="p-1.5 bg-slate-900 rounded border border-white/[0.02] text-[7.5px] text-slate-300 truncate">
+            <div className="p-1.5 bg-slate-900 rounded border border-white/[0.02] text-[7.5px] text-slate-350 truncate">
               "This software is fast, robust, and beautiful!"
             </div>
             <div className="flex justify-between items-center pt-0.5 text-[7px]">
@@ -297,7 +293,7 @@ function ProjectCard({
             </div>
             <div className="flex justify-between">
               <span>Service Status:</span>
-              <span className="text-slate-300">Healthy</span>
+              <span className="text-slate-350">Healthy</span>
             </div>
             <div className="flex justify-between">
               <span>Core Module:</span>
@@ -318,7 +314,7 @@ function ProjectCard({
         transformStyle: "preserve-3d",
         transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
       }}
-      className={`group relative p-8 sm:p-10 rounded-3xl bg-[#090720]/95 border transition-all duration-300 cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.65)] flex flex-col justify-between select-none ${
+      className={`group relative p-6 sm:p-8 rounded-3xl bg-[#090720]/95 border transition-all duration-300 cursor-pointer shadow-[0_20px_50px_rgba(0,0,0,0.65)] flex flex-col justify-between select-none ${
         isActive 
           ? "border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.15)] ring-1 ring-cyan-500/20" 
           : "border-white/[0.08] hover:border-cyan-500/25"
@@ -335,12 +331,10 @@ function ProjectCard({
         />
       )}
 
-      {/* Main Content Layout */}
-      <div className={`relative z-10 flex flex-col gap-6 md:gap-8 justify-between items-stretch ${
-        isAlternate ? "md:flex-row-reverse" : "md:flex-row"
-      }`}>
+      {/* Main Content Layout - Unified vertical flow for 100% responsiveness and no overflow */}
+      <div className="relative z-10 flex flex-col gap-6 justify-between items-stretch">
         
-        {/* Left Side Content Column */}
+        {/* Top Side Content Column */}
         <div className="flex-1 flex flex-col justify-between gap-4" style={{ transform: "translateZ(35px)" }}>
           <div>
             {/* Icon & Title Header */}
@@ -359,7 +353,7 @@ function ProjectCard({
             </div>
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
               {project.description}
             </p>
           </div>
@@ -374,13 +368,9 @@ function ProjectCard({
           </div>
         </div>
 
-        {/* Right Side Visual & CTAs Column */}
+        {/* Bottom Side Visual & CTAs Column */}
         <div 
-          className={`md:w-[280px] shrink-0 flex flex-col justify-between gap-6 border-t md:border-t-0 pt-6 md:pt-0 ${
-            isAlternate 
-              ? "md:border-r border-white/[0.06] md:pr-8" 
-              : "md:border-l border-white/[0.06] md:pl-8"
-          }`}
+          className="w-full shrink-0 flex flex-col justify-between gap-6 border-t border-white/[0.06] pt-6"
           style={{ transform: "translateZ(25px)" }}
         >
           {/* Custom designed visual console widget */}
@@ -410,7 +400,7 @@ function ProjectCard({
                     className="p-1.5 text-slate-550 cursor-help"
                     title={project.codePrivateReason}
                   >
-                    <Lock className="w-4 h-4 text-amber-550" />
+                    <Lock className="w-4 h-4 text-amber-500" />
                   </span>
                 )
               )}
@@ -423,7 +413,7 @@ function ProjectCard({
   );
 }
 
-// Timeline row wrapping layout with left-aligned connectors
+// Center alternating project row layout
 function ProjectRow({
   project,
   idx,
@@ -437,16 +427,32 @@ function ProjectRow({
   setActiveIdx: (idx: number) => void;
   onOpenModal: (p: Project) => void;
 }) {
+  const isLeft = idx % 2 === 0;
   const isActive = activeIdx === idx;
 
   return (
     <motion.div
       onViewportEnter={() => setActiveIdx(idx)}
       viewport={{ amount: 0.35 }}
-      className="relative w-full flex flex-col lg:flex-row items-center justify-start min-h-[35vh] sm:min-h-[40vh] py-10 pl-0 lg:pl-20"
+      className="relative w-full flex flex-col lg:flex-row items-center justify-between min-h-[40vh] sm:min-h-[50vh] py-12"
     >
-      {/* Left Timeline Node Dot */}
-      <div className="absolute left-[32px] -translate-x-1/2 w-4 h-4 hidden lg:flex items-center justify-center z-15">
+      {/* Left Column */}
+      <div className={`w-full lg:w-[45%] z-10 flex ${isLeft ? "justify-end" : "hidden lg:flex"}`}>
+        {isLeft && (
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full"
+          >
+            <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} />
+          </motion.div>
+        )}
+      </div>
+
+      {/* Center Timeline Node Dot */}
+      <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 hidden lg:flex items-center justify-center z-15">
         <div className={`w-4 h-4 rounded-full bg-slate-950 border-2 border-slate-800 transition-all duration-500 relative flex items-center justify-center ${isActive ? "border-cyan-400 scale-125" : ""}`}>
           {isActive && (
             <>
@@ -459,27 +465,35 @@ function ProjectRow({
 
       {/* Horizontal Connector Line */}
       <div
-        className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-slate-900/60 hidden lg:block left-[32px] w-[32px]"
+        className={`absolute top-1/2 -translate-y-1/2 h-[2px] bg-slate-900/60 hidden lg:block ${
+          isLeft ? "left-[45%] right-1/2" : "left-1/2 right-[45%]"
+        }`}
       >
+        {/* Glowing laser path that fills when active */}
         <motion.div
-          className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 origin-left"
+          className="h-full bg-gradient-to-r from-cyan-400 to-purple-500"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isActive ? 1 : 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
+          style={{
+            originX: isLeft ? 1 : 0, // Fill from center out towards the card
+          }}
         />
       </div>
 
-      {/* Card Content Column */}
-      <div className="w-full lg:w-[95%] max-w-4xl z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-full"
-        >
-          <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} idx={idx} />
-        </motion.div>
+      {/* Right Column */}
+      <div className={`w-full lg:w-[45%] z-10 flex ${!isLeft ? "justify-start" : "hidden lg:flex"}`}>
+        {!isLeft && (
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full"
+          >
+            <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} />
+          </motion.div>
+        )}
       </div>
     </motion.div>
   );
@@ -571,11 +585,11 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Grid Track Container with Left-Aligned Timeline */}
-        <div className="relative py-10 w-full flex flex-col gap-8 sm:gap-12 z-10">
+        {/* Alternating Grid Track Container */}
+        <div className="relative py-10 w-full flex flex-col gap-8 sm:gap-16 z-10">
           
-          {/* Vertical center track line on the left */}
-          <div className="absolute left-[32px] top-[5%] bottom-[5%] w-[2px] bg-slate-900/60 -translate-x-1/2 hidden lg:block">
+          {/* Vertical center track line */}
+          <div className="absolute left-1/2 top-[5%] bottom-[5%] w-[2px] bg-slate-900/60 -translate-x-1/2 hidden lg:block">
             {/* Filled progress path */}
             <motion.div
               className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-400 via-purple-500 to-indigo-500 rounded-full origin-top"
