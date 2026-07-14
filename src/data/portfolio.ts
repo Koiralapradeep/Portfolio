@@ -264,6 +264,31 @@ export const portfolioData: PortfolioData = {
         live: "https://calculator-snowy-ten-76.vercel.app/",
         code: "https://github.com/Koiralapradeep/calculator"
       }
+    },
+    {
+      id: "ludo",
+      title: "Puttu Ludo",
+      description: "A high-fidelity Progressive Web App (PWA) Ludo game featuring a warm vintage paper-and-gold design, smart local AI, and real-time procedural audio synthesis.",
+      icon: "Gamepad",
+      tech: ["JavaScript", "Web Audio API", "PWA", "SVG"],
+      live: "https://ludo-psi-one.vercel.app/",
+      code: "https://github.com/Koiralapradeep/Ludo.git",
+      caseStudy: {
+        kicker: "Case Study • Web Game & PWA",
+        title: "Puttu Ludo – Classic Board Game PWA",
+        desc: "A high-fidelity Progressive Web App (PWA) recreation of the classic Ludo board game, featuring a warm vintage paper-and-gold design and real-time procedural audio synthesis.",
+        highlights: [
+          "Progressive Web App (PWA): Installs on iOS, Android, and Desktop; caches shell assets for 100% offline gameplay.",
+          "Procedural Audio Synth: Uses Web Audio API to synthesize all sound effects in real-time, eliminating external audio files entirely.",
+          "Smart Local AI: Integrates decision-making scripts enabling single-player offline games against custom AI opponents.",
+          "Classic Board Rules Engine: Implements safe zones, double-token blockades, automatic spawn on sixes, and turn forfeits on three sixes.",
+          "Asset-less Performance: Uses synthesized oscillators and vector SVGs to drop the entire game payload size under 150 KB.",
+          "Responsive Coordinate Mapping: Map movements using vmin percentages for pixel-perfect cell alignment on all devices."
+        ],
+        stack: ["JavaScript", "HTML5", "CSS3", "Web Audio API", "PWA", "SVG", "Vercel"],
+        live: "https://ludo-psi-one.vercel.app/",
+        code: "https://github.com/Koiralapradeep/Ludo.git"
+      }
     }
   ],
   skills: [

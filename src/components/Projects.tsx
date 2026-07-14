@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { portfolioData, Project } from "@/data/portfolio";
-import { Activity, FileText, Users, Brain, MessageSquare, Scale, ArrowUpRight, Calculator, Lock } from "lucide-react";
+import { Activity, FileText, Users, Brain, MessageSquare, Scale, ArrowUpRight, Calculator, Lock, Gamepad2 } from "lucide-react";
 import CaseStudyModal from "./CaseStudyModal";
 
 // Map project ID to appropriate Lucide icon
@@ -23,6 +23,8 @@ const getProjectIcon = (iconName: string) => {
       return <Scale className="w-5 h-5 text-amber-400" />;
     case "calculator":
       return <Calculator className="w-5 h-5 text-teal-400" />;
+    case "gamepad":
+      return <Gamepad2 className="w-5 h-5 text-rose-400" />;
     default:
       return <FileText className="w-5 h-5 text-cyan-400" />;
   }
