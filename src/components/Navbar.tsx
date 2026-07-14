@@ -68,7 +68,7 @@ export default function Navbar() {
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? "py-4 bg-background/70 backdrop-blur-md shadow-lg border-b border-card-border"
+            ? "py-4 bg-transparent"
             : "py-6 bg-transparent"
         }`}
       >
