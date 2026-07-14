@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ArrowUpRight, CheckCircle, Lock } from "lucide-react";
+import { X, ArrowUpRight, CheckCircle, Lock, Cpu, Database, Award } from "lucide-react";
 import { ProjectCaseStudy } from "@/data/portfolio";
 
 // Custom inline SVG icons to prevent lucide-react brand deprecation errors
@@ -31,7 +31,7 @@ interface CaseStudyModalProps {
 }
 
 export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudyModalProps) {
-  // Prevent background scrolling when modal is open
+  // Prevent native body scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -48,68 +48,82 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+        <div 
+          data-lenis-prevent
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto"
+        >
           {/* Backdrop blur overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-md"
+            className="fixed inset-0 bg-black/75 backdrop-blur-xl"
           />
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-3xl bg-slate-900/90 dark:bg-slate-950/95 border border-white/10 dark:border-white/5 rounded-2xl shadow-2xl overflow-hidden z-10 backdrop-blur-xl flex flex-col max-h-[85vh]"
+            exit={{ opacity: 0, scale: 0.95, y: 30 }}
+            transition={{ type: "spring", duration: 0.55, bounce: 0.2 }}
+            className="relative w-full max-w-3xl bg-[#060415]/95 dark:bg-[#04020f]/98 border border-white/[0.08] rounded-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85)] overflow-hidden z-10 backdrop-blur-2xl flex flex-col max-h-[85vh] glow-card"
           >
             {/* Header banner glow */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 via-purple-500 to-indigo-500" />
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-400 via-purple-500 to-indigo-500" />
+            
+            {/* Ambient decorative background glows inside modal */}
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
 
             {/* Modal Header */}
-            <div className="p-6 md:p-8 border-b border-white/10 flex justify-between items-start">
+            <div className="p-6 md:p-8 border-b border-white/[0.06] flex justify-between items-start relative z-10">
               <div>
-                <span className="text-xs font-semibold text-cyan-400 uppercase tracking-widest block mb-1">
+                <span className="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-[0.2em] block mb-1">
                   {caseStudy.kicker}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white">
+                <h3 className="text-2xl md:text-3xl font-black text-slate-100 tracking-tight leading-tight">
                   {caseStudy.title}
                 </h3>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 text-slate-400 hover:text-white rounded-full bg-white/5 hover:bg-white/10 transition-colors"
+                className="p-2 text-slate-400 hover:text-white rounded-full bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] transition-all cursor-pointer"
                 aria-label="Close Case Study"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
             {/* Modal Scrollable Body */}
-            <div className="p-6 md:p-8 overflow-y-auto flex-1 space-y-8">
-              {/* Project Description */}
-              <div>
-                <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-2">
-                  Overview
-                </h4>
-                <p className="text-slate-300 leading-relaxed">
+            <div 
+              data-lenis-prevent
+              className="p-6 md:p-8 overflow-y-auto flex-1 space-y-6 relative z-10 no-scrollbar"
+            >
+              {/* Project Description Panel */}
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-3">
+                <div className="flex items-center gap-2 text-slate-400 font-mono text-[9px] uppercase tracking-wider">
+                  <Database className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Specification Brief</span>
+                </div>
+                <p className="text-slate-350 leading-relaxed text-sm md:text-base font-medium">
                   {caseStudy.desc}
                 </p>
               </div>
 
-              {/* Technical Highlights */}
-              <div>
-                <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">
-                  Engineering Highlights & Contributions
-                </h4>
+              {/* Technical Highlights Panel */}
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-4">
+                <div className="flex items-center gap-2 text-slate-400 font-mono text-[9px] uppercase tracking-wider">
+                  <Award className="w-3.5 h-3.5 text-purple-400" />
+                  <span>Engineering Accomplishments</span>
+                </div>
                 <ul className="space-y-3">
                   {caseStudy.highlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
-                      <span className="text-slate-300 leading-relaxed text-sm md:text-base">
+                    <li key={idx} className="flex items-start gap-3 group">
+                      <div className="p-1 rounded bg-cyan-950/40 border border-cyan-500/20 shrink-0 mt-0.5">
+                        <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
+                      </div>
+                      <span className="text-slate-300 leading-relaxed text-xs md:text-sm font-medium">
                         {highlight}
                       </span>
                     </li>
@@ -117,16 +131,17 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
                 </ul>
               </div>
 
-              {/* Technologies Applied */}
-              <div>
-                <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-3">
-                  Stack & Tooling Applied
-                </h4>
-                <div className="flex flex-wrap gap-2">
+              {/* Technologies Applied Panel */}
+              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-3">
+                <div className="flex items-center gap-2 text-slate-400 font-mono text-[9px] uppercase tracking-wider">
+                  <Cpu className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Architecture & Tooling</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {caseStudy.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-white/[0.04] border border-white/[0.08] text-slate-200 text-xs md:text-sm rounded-full font-mono"
+                      className="px-3 py-1 bg-slate-900 border border-white/[0.04] text-slate-300 text-[10px] md:text-xs rounded-lg font-mono font-semibold"
                     >
                       {tech}
                     </span>
@@ -136,11 +151,11 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
             </div>
 
             {/* Modal Actions Footer */}
-            <div className="p-6 md:p-8 bg-slate-950/80 border-t border-white/10 flex flex-col sm:flex-row gap-4 justify-between items-stretch sm:items-center">
+            <div className="p-6 md:p-8 bg-[#04020f]/80 border-t border-white/[0.06] flex flex-col sm:flex-row gap-4 justify-between items-stretch sm:items-center relative z-10">
               {caseStudy.codePrivateReason ? (
-                <div className="flex items-center gap-2 text-left text-slate-400 sm:max-w-[60%]">
-                  <Lock className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium leading-tight">
+                <div className="flex items-center gap-2.5 text-left text-slate-400 sm:max-w-[55%]">
+                  <Lock className="w-4 h-4 text-amber-500 shrink-0 animate-pulse" />
+                  <span className="text-[11px] font-mono font-medium leading-tight">
                     {caseStudy.codePrivateReason}
                   </span>
                 </div>
@@ -154,10 +169,10 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
                     href={caseStudy.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl font-medium shadow-md shadow-cyan-500/10 hover:shadow-cyan-500/20 transition-all flex items-center justify-center gap-2 group"
+                    className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-white text-xs md:text-sm rounded-xl font-bold shadow-md shadow-cyan-500/10 hover:shadow-cyan-500/25 transition-all flex items-center justify-center gap-2 group cursor-pointer"
                   >
                     Live Demo
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
                 )}
                 {caseStudy.code && (
@@ -165,9 +180,9 @@ export default function CaseStudyModal({ isOpen, onClose, caseStudy }: CaseStudy
                     href={caseStudy.code}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white/[0.05] border border-white/[0.08] hover:bg-white/[0.1] text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                    className="px-5 py-2.5 bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] text-slate-200 text-xs md:text-sm rounded-xl font-bold transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <GithubIcon className="w-4 h-4" />
+                    <GithubIcon className="w-3.5 h-3.5 text-slate-300" />
                     Source Code
                   </a>
                 )}

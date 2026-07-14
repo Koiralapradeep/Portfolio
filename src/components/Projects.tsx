@@ -35,16 +35,20 @@ function ProjectCard({
   project,
   onOpenModal,
   isActive,
+  idx,
 }: {
   project: Project;
   onOpenModal: (p: Project) => void;
   isActive: boolean;
+  idx: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
   const [spotlightPos, setSpotlightPos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+
+  const isAlternate = idx % 2 === 1;
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -196,7 +200,7 @@ function ProjectCard({
 
       case "resume":
         return (
-          <div className="p-4 bg-slate-955/80 rounded-xl border border-white/[0.04] space-y-2 pointer-events-none select-none font-mono text-[9px] text-slate-500 shadow-inner">
+          <div className="p-4 bg-slate-950/80 rounded-xl border border-white/[0.04] space-y-2 pointer-events-none select-none font-mono text-[9px] text-slate-500 shadow-inner">
             <div className="flex justify-between text-cyan-400 border-b border-white/[0.06] pb-1.5 font-semibold uppercase tracking-wider text-[8px]">
               <span>Resume Compiler</span>
               <span className="text-emerald-400">PDF Ready</span>
@@ -332,7 +336,9 @@ function ProjectCard({
       )}
 
       {/* Main Content Layout */}
-      <div className="relative z-10 flex flex-col md:flex-row gap-6 md:gap-8 justify-between items-stretch">
+      <div className={`relative z-10 flex flex-col gap-6 md:gap-8 justify-between items-stretch ${
+        isAlternate ? "md:flex-row-reverse" : "md:flex-row"
+      }`}>
         
         {/* Left Side Content Column */}
         <div className="flex-1 flex flex-col justify-between gap-4" style={{ transform: "translateZ(35px)" }}>
@@ -370,7 +376,11 @@ function ProjectCard({
 
         {/* Right Side Visual & CTAs Column */}
         <div 
-          className="md:w-[280px] shrink-0 flex flex-col justify-between gap-6 border-t md:border-t-0 md:border-l border-white/[0.06] pt-6 md:pt-0 md:pl-8" 
+          className={`md:w-[280px] shrink-0 flex flex-col justify-between gap-6 border-t md:border-t-0 pt-6 md:pt-0 ${
+            isAlternate 
+              ? "md:border-r border-white/[0.06] md:pr-8" 
+              : "md:border-l border-white/[0.06] md:pl-8"
+          }`}
           style={{ transform: "translateZ(25px)" }}
         >
           {/* Custom designed visual console widget */}
@@ -400,7 +410,7 @@ function ProjectCard({
                     className="p-1.5 text-slate-550 cursor-help"
                     title={project.codePrivateReason}
                   >
-                    <Lock className="w-4 h-4 text-amber-500" />
+                    <Lock className="w-4 h-4 text-amber-550" />
                   </span>
                 )
               )}
@@ -413,7 +423,7 @@ function ProjectCard({
   );
 }
 
-// Alternating project row wrapping layout
+// Timeline row wrapping layout with left-aligned connectors
 function ProjectRow({
   project,
   idx,
@@ -427,33 +437,17 @@ function ProjectRow({
   setActiveIdx: (idx: number) => void;
   onOpenModal: (p: Project) => void;
 }) {
-  const isLeft = idx % 2 === 0;
   const isActive = activeIdx === idx;
 
   return (
     <motion.div
       onViewportEnter={() => setActiveIdx(idx)}
       viewport={{ amount: 0.35 }}
-      className="relative w-full flex flex-col lg:flex-row items-center justify-between min-h-[40vh] sm:min-h-[50vh] py-12"
+      className="relative w-full flex flex-col lg:flex-row items-center justify-start min-h-[35vh] sm:min-h-[40vh] py-10 pl-0 lg:pl-20"
     >
-      {/* Left Column */}
-      <div className={`w-full lg:w-[45%] z-10 flex ${isLeft ? "justify-end" : "hidden lg:flex"}`}>
-        {isLeft && (
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full"
-          >
-            <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} />
-          </motion.div>
-        )}
-      </div>
-
-      {/* Center Timeline Node Dot */}
-      <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 hidden lg:flex items-center justify-center z-15">
-        <div className={`w-4 h-4 rounded-full bg-slate-950 border-2 border-slate-800 transition-all duration-505 relative flex items-center justify-center ${isActive ? "border-cyan-400 scale-125" : ""}`}>
+      {/* Left Timeline Node Dot */}
+      <div className="absolute left-[32px] -translate-x-1/2 w-4 h-4 hidden lg:flex items-center justify-center z-15">
+        <div className={`w-4 h-4 rounded-full bg-slate-950 border-2 border-slate-800 transition-all duration-500 relative flex items-center justify-center ${isActive ? "border-cyan-400 scale-125" : ""}`}>
           {isActive && (
             <>
               <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
@@ -465,35 +459,27 @@ function ProjectRow({
 
       {/* Horizontal Connector Line */}
       <div
-        className={`absolute top-1/2 -translate-y-1/2 h-[2px] bg-slate-900/60 hidden lg:block ${
-          isLeft ? "left-[45%] right-1/2" : "left-1/2 right-[45%]"
-        }`}
+        className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-slate-900/60 hidden lg:block left-[32px] w-[32px]"
       >
-        {/* Glowing laser path that fills when active */}
         <motion.div
-          className="h-full bg-gradient-to-r from-cyan-400 to-purple-500"
+          className="h-full bg-gradient-to-r from-cyan-400 to-purple-500 origin-left"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: isActive ? 1 : 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          style={{
-            originX: isLeft ? 1 : 0, // Fill from center out towards the card
-          }}
         />
       </div>
 
-      {/* Right Column */}
-      <div className={`w-full lg:w-[45%] z-10 flex ${!isLeft ? "justify-start" : "hidden lg:flex"}`}>
-        {!isLeft && (
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="w-full"
-          >
-            <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} />
-          </motion.div>
-        )}
+      {/* Card Content Column */}
+      <div className="w-full lg:w-[95%] max-w-4xl z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="w-full"
+        >
+          <ProjectCard project={project} onOpenModal={onOpenModal} isActive={isActive} idx={idx} />
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -556,7 +542,7 @@ export default function Projects() {
         <span className="text-[10px] font-mono font-bold tracking-widest text-cyan-400">
           0{activeIdx + 1} / 0{numProjects}
         </span>
-        <span className="text-[10px] uppercase font-mono tracking-widest text-slate-300 font-bold truncate max-w-[180px]">
+        <span className="text-[10px] uppercase font-mono tracking-widest text-slate-350 font-bold truncate max-w-[180px]">
           {projects[activeIdx]?.title}
         </span>
         <div className="w-20 h-1 bg-slate-900 rounded-full overflow-hidden border border-white/[0.04]">
@@ -585,11 +571,11 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* Alternating Grid Track Container */}
-        <div className="relative py-10 w-full flex flex-col gap-8 sm:gap-16 z-10">
+        {/* Grid Track Container with Left-Aligned Timeline */}
+        <div className="relative py-10 w-full flex flex-col gap-8 sm:gap-12 z-10">
           
-          {/* Vertical center track line */}
-          <div className="absolute left-1/2 top-[5%] bottom-[5%] w-[2px] bg-slate-900/60 -translate-x-1/2 hidden lg:block">
+          {/* Vertical center track line on the left */}
+          <div className="absolute left-[32px] top-[5%] bottom-[5%] w-[2px] bg-slate-900/60 -translate-x-1/2 hidden lg:block">
             {/* Filled progress path */}
             <motion.div
               className="absolute top-0 left-0 w-full bg-gradient-to-b from-cyan-400 via-purple-500 to-indigo-500 rounded-full origin-top"
